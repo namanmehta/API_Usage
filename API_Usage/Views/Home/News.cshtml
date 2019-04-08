@@ -1,0 +1,48 @@
+﻿@model IEnumerable<API_Usage.Models.News>
+<h2>Top News</h2>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Head Line
+            </th>
+            <th>
+                Source
+            </th>
+            <th>
+                Summary
+            </th>
+            <th>
+                URL
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.headline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.source)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.summary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.url)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <a id="dbopt" asp-controller="Home" asp-action="PopulateNews"><img src="~/img/button_save-data.png" /></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    alertDbSave(@ViewBag.dbSuccessComp);
+</script>

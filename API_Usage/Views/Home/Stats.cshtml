@@ -1,0 +1,38 @@
+﻿@model API_Usage.Models.Stats
+<h2>Top News</h2>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Company
+            </th>
+            <th>
+                Market Cap
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @*@foreach (var item in Model)
+        {*@
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.companyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.marketcap)
+                </td>
+                
+            </tr>
+        @*  *@
+        <tr>
+            <td>
+                <a id="dbopt" asp-controller="Home" asp-action="PopulateStats"><img src="~/img/button_save-data.png" /></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    alertDbSave(@ViewBag.dbSuccessComp);
+</script>

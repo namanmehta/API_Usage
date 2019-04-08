@@ -1,0 +1,72 @@
+﻿@model IEnumerable<API_Usage.Models.CompanyInfo>
+<h2>Top 5 Comapnies</h2>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Symbol
+            </th>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Exhange
+            </th>
+            <th>
+                Industry
+            </th>
+            <th>
+                Website
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                CEO
+            </th>
+            <th>
+                Sector
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.symbol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.companyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.exchange)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.industry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.website)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CEO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sector)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <a id="dbopt" asp-controller="Home" asp-action="SaveTop5"><img src="~/img/button_save-data.png" /></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    alertDbSave(@ViewBag.dbSuccessComp);
+</script>

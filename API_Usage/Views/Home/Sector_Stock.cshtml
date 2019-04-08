@@ -1,0 +1,104 @@
+﻿@model API_Usage.Models.sectorData
+@{
+    foreach (var item in Model.Gain)
+    {
+        ViewData["Secto"] = item.sector;
+        break;
+    }
+    ViewData["Title"] = "Sector_Stock";
+}
+<h2>Sector_Stock_Data</h2>
+<form asp-controller="Home" asp-action="Sector1" method="get">
+    <select name="Sector">
+        @foreach (var company in Model.SectorL)
+        {
+            <option value=@company.name class="selector">@company.name</option>
+            ViewData["sel"] = ViewData["Secto"];
+        }
+    </select>
+    <input type="submit" value="Submit" />
+</form>
+<table class="table">
+    <thead>
+        <tr id="title" data-sec="@ViewData["Secto"]"></tr>
+        <tr>
+            <th>
+                Company
+            </th>
+            <th>
+                Open
+            </th>
+            <th>
+                Close
+            </th>
+            <th>
+                High
+            </th>
+            <th>
+                Low
+            </th>
+            <th>
+                Latest Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Gain)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.companyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.open)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.close)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.high)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.low)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.latestPrice)
+                </td>
+            </tr>
+        }
+        @*<tr>
+            <td>
+                <a id="dbopt" asp-controller="Home" asp-action="PopulateSector1"><img src="~/img/button_save-data.png" /></a>
+            </td>
+        </tr>*@
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $('#title').each(function () {
+
+            var me = $(this);
+            var sel = me.data("sec");
+            if (sel == "Consumer Defensive")
+                $('#title').text("Consumer Staples");
+            else if (sel == "Healthcare")
+                $('#title').text("Health Care");
+            else if (sel == "Consumer Cyclical")
+                $('#title').text("Consumer Discretionary");
+            else if (sel == "Basic Materials")
+                $('#title').text("Materials");
+            else if (sel == "Financial Services")
+                $('#title').text("Financials");
+            else
+                $('#title').text(sel);
+            var me1 = $('#title').text();
+            $('.selector').each(function () {
+                if ($(this).text() == me1)
+                    $(this).attr("selected", "selected");
+
+            });
+        });
+     });
+    alertDbSave(@ViewBag.dbSuccessChart);
+</script>

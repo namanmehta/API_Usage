@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+//using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace API_Usage.Models
 {
@@ -31,4 +33,12 @@ namespace API_Usage.Models
     public string Message { get; set; }
     public string JsonObject { get; set; }
   }
+
+    public class sectorData
+    {
+        [Key]
+        public int id { get; set; }
+        public List<GainersList> Gain { get; set; }
+        public List<Sector> SectorL { get; set; }
+    }
 }

@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "about";
+}
+
+<br /><br />
+<h2>About Assignment:</h2>
+<p1>This web service gives its users a brief insights about the stock market and its utilities. In this website a user can get details about stock open and close prices, famous widely used cryptocurrencies and news. Moreover the user can get details about the well performing sectors.</p1><br />
+<p2>
+    <u>
+        As part of this assignment, we have called the below APIs and their respective functions are:<br />
+</p2><br /></u>
+
+<p2>
+    •	<a href="https://api.iextrading.com/1.0/stock/market/news/last/5">https://api.iextrading.com/1.0/stock/market/news/last/5</a>
+    : This API is returning market-wide news. The number here “5” will display only 5 news. We can change this number according to the user’s need.
+    By using this API, we are displaying source of the news article, their headline and summary of the news and also URL to access the news.
+</p2><br />
+<p2>
+    •	<a href="https://api.iextrading.com/1.0/stock/market/crypto">https://api.iextrading.com/1.0/stock/market/crypto</a>  :  Information which we are using from this API to display on the UI are, company name, type of cryptocurrency, opening and closing price for the currency and what is its latest price and latest update.
+</p2><br />
+<p2>
+    •	<a href="https://api.iextrading.com/1.0/stock/market/sector-performance">https://api.iextrading.com/1.0/stock/market/sector-performance</a>  :  We are using this API, to display information that which sector is performing best and is most efficient in stock market.
+</p2><br />
+<p2>
+
+    •	<a href="https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName=">https://api.iextrading.com/1.0/stock/market/collection/sector?collectionName= </a> :  This API we are using is to display the name of companies for selected sector which user would be interested in.
+</p2><br /><br />
+
+<h2>Team Members</h2><br />
+<p2>  This assignment has been successfully completed with the collaboration of all team members and their contributions for the assignment is as follows:</p2><br /><br />
+
+    Vijaya Singh: I handled the view part of the assignments and searched for the relative APIs to use to display information. As part of this assignment, I learnt about deployment on Azure cloud platform and it helped me in understanding the flow of MVC architecture.<br /><br />
+
+    Naman Mehta: I handled the controller part and wrote the code to accept input and convert it to commands for the views. I deployed the project on azure cloud. As part of this assignment I learnt how to make connections to APIs and parse the json data to display on UI and save the data in Database.<br /><br />
+
+    Sarvesh Ahuja: I handled the Model part for managing the data for application. I also helped in creating the relational database for this assignment. As part of this assignment I learnt how to create database and make connection.<br /><br />
+
+

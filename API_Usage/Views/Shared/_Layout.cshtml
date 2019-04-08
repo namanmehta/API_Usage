@@ -12,12 +12,19 @@
 </head>
 <body>
   <nav>
-    <div class="nav-bar">
-      <a asp-area="" asp-controller="Home" asp-action="Index">Home </a><text> | </text>
-      <a asp-area="" asp-controller="Home" asp-action="Symbols">Symbols </a><text> | </text>
-      <a asp-area="" asp-controller="Home" asp-action="Chart">Chart </a><text> | </text>
-      <a asp-area="" asp-controller="Home" asp-action="Refresh">Refresh </a><text> | </text>
-    </div>
+      <div class="nav-bar">
+          <a asp-area="" asp-controller="Home" asp-action="Index">Home </a><text> | </text>
+          <a asp-area="" asp-controller="Home" asp-action="Symbols">Symbols </a><text> | </text>
+          <a asp-area="" asp-controller="Home" asp-action="Chart">Chart </a><text> | </text>
+          <a asp-area="" asp-controller="Home" asp-action="Refresh">Refresh </a><text> | </text>
+          <a asp-area="" asp-controller="Home" asp-action="News">News</a><text> | </text>
+          <a asp-area="" asp-controller="Home" asp-action="Crypto">Crypto</a><text> | </text>
+          <a asp-area="" asp-controller="Home" asp-action="Sector">Sector Performance</a><text> | </text>
+          <a asp-area="" asp-controller="Home" asp-action="Stats">Top Stock</a><text> | </text>
+          <a asp-area="" asp-controller="Home" asp-action="Sector1">Sector Details</a><text> | </text>
+          <a asp-area="" asp-controller="Home" asp-action="About">About Assignment & Self Reflection</a><text> | </text>
+
+      </div>
   </nav>
   <div class="container body-content">
     @RenderBody()

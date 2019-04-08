@@ -43,20 +43,7 @@ namespace API_Usage.Controllers
           }
         };
 
-        // Replace the API_KEY and BASE_ADDRESS with the values provided in class for the service
-        //const string apiKey = "API_KEY";
-        //client.BaseAddress = new Uri("BASE_ADRESS");
-
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
-
-        // WARNING: The 'await' statement below can result in a deadlock if you are calling this code 
-        //  from the UI thread of an ASP.Net application.
-        // One way to address this would be to call ConfigureAwait(false) so that the execution does not 
-        //  attempt to resume on the original context.
-        // For instance, replace code such as:
-        //      result = await DoSomeTask()
-        // with the following:
-        //      result = await DoSomeTask().ConfigureAwait(false)
+        
         HttpResponseMessage response = await client.PostAsJsonAsync("", scoreRequest);
 
         if (response.IsSuccessStatusCode)
@@ -69,8 +56,7 @@ namespace API_Usage.Controllers
         }
         else
         {
-          // Print the headers - they include the requert ID and the timestamp, 
-          //  which are useful for debugging the failure
+          
           ViewModel.Message = string.Format("The request failed with status code: {0}", response.StatusCode);
           ViewModel.Message += "\n" + response.Headers.ToString();
 

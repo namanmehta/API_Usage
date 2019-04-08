@@ -1,0 +1,40 @@
+﻿@model IEnumerable<API_Usage.Models.Sector>
+<h2>Top News</h2>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                Sector Name
+            </th>
+            <th>
+                Performance
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.performance)
+                </td>
+                
+            </tr>
+        }
+        <tr>
+            <td>
+                <a id="dbopt" asp-controller="Home" asp-action="PopulateSector"><img src="~/img/button_save-data.png" /></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    alertDbSave(@ViewBag.dbSuccessComp);
+</script>
