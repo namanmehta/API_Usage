@@ -761,9 +761,9 @@ namespace API_Usage.Controllers
                 sectorStock = JsonConvert.DeserializeObject<List<GainersList>>(gList, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
             }
-            
-            // Sarvesh Ahuja: I handled the Model part for managing the data for for application. I also helped in creating the relational database for this assignment. As part of this assignment I learnt how to create database and make connection.
             return sectorStock;
         }
     }
 }
+
+            // Sarvesh Ahuja: I handled the Model part for managing the data for for application. I also helped in creating the relational database for this assignment. As part of this assignment I learnt how to create database and make connection.
