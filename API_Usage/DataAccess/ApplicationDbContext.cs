@@ -14,5 +14,7 @@ namespace API_Usage.DataAccess
     public DbSet<Sector> Sector { get; set; }
     public DbSet<Stats> Stats { get; set; }
     public DbSet<sectorData> sectorData { get; set; }
-  }
+    public DbSet<FinancialList> FinancialList { get; set; }
+    public DbSet<Financial> Financial { get; set; }
+    }
 }

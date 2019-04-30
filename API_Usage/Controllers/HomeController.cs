@@ -196,7 +196,8 @@ namespace API_Usage.Controllers
             tableCount.Add("Cryto", dbContext.Crypto.Count());
             tableCount.Add("Sector", dbContext.Sector.Count());
             tableCount.Add("Statistics", dbContext.Stats.Count());
-            
+            tableCount.Add("Financial", dbContext.FinancialList.Count());
+
 
 
             return View(tableCount);
@@ -297,7 +298,7 @@ namespace API_Usage.Controllers
         {
 
             Stats stats1 = JsonConvert.DeserializeObject<Stats>(TempData["Stats"].ToString());
-
+            TempData.Keep("Stats");
             //foreach (Stats new1 in stats1)
             //{
 
@@ -316,7 +317,7 @@ namespace API_Usage.Controllers
         {
 
             List<News> news1 = JsonConvert.DeserializeObject<List<News>>(TempData["News"].ToString());
-
+            TempData.Keep("News");
             foreach (News new1 in news1)
             {
 
@@ -369,7 +370,7 @@ namespace API_Usage.Controllers
         {
 
             List<Crypto> crypto1 = JsonConvert.DeserializeObject<List<Crypto>>(TempData["Crypto"].ToString());
-
+            TempData.Keep("Crypto");
             foreach (Crypto new1 in crypto1)
             {
 
@@ -421,7 +422,7 @@ namespace API_Usage.Controllers
         {
 
             List<Sector> s1 = JsonConvert.DeserializeObject<List<Sector>>(TempData["Sector"].ToString());
-
+            TempData.Keep("Sector");
             foreach (Sector new1 in s1)
             {
 
@@ -602,7 +603,7 @@ namespace API_Usage.Controllers
             //  in the symbols method. This example has been structured to demonstrate one way to save object data
             //  and retrieve it later
             List<Company> companies = JsonConvert.DeserializeObject<List<Company>>(TempData["Companies"].ToString());
-
+            TempData.Keep("Companies");
             foreach (Company company in companies)
             {
                 //Database will give PK constraint violation error when trying to insert record with existing PK.
@@ -634,7 +635,8 @@ namespace API_Usage.Controllers
                 dbContext.News.RemoveRange(dbContext.News);
                 dbContext.Crypto.RemoveRange(dbContext.Crypto);
                 dbContext.Sector.RemoveRange(dbContext.Sector);
-
+                dbContext.Financial.RemoveRange(dbContext.Financial);
+                dbContext.FinancialList.RemoveRange(dbContext.FinancialList);
 
             }
             else if ("Companies".Equals(tableToDel))
@@ -668,36 +670,41 @@ namespace API_Usage.Controllers
                 dbContext.Stats.RemoveRange(dbContext.Stats);
 
             }
+            else if ("Financial".Equals(tableToDel))
+            {
+                dbContext.Financial.RemoveRange(dbContext.Financial);
+                dbContext.FinancialList.RemoveRange(dbContext.FinancialList);
+            }
 
             dbContext.SaveChanges();
         }
 
-        public IActionResult About()
+        public IActionResult about()
         {
             return View("about");
         }
 
-        public IActionResult Sector1(string sector)
-        {
-            ViewBag.dbSucessComp = 0;
+        //public IActionResult Sector1(string sector)
+        //{
+        //    ViewBag.dbSucessComp = 0;
 
-            sectorData sectorList = new sectorData();
+        //    sectorData sectorList = new sectorData();
 
-            sectorList.SectorL = getSector();
-            if (sector != null)
-            {
-                sectorList.Gain = getSectorStock(sector);
-            }
-            else
-            {
-                sectorList.Gain = getSectorStock("Health%20Care");
-            }
-            TempData["SectorA"] = JsonConvert.SerializeObject(sectorList.Gain.Take(10));
+        //    sectorList.SectorL = getSector();
+        //    if (sector != null)
+        //    {
+        //        sectorList.Gain = getSectorStock(sector);
+        //    }
+        //    else
+        //    {
+        //        sectorList.Gain = getSectorStock("Health%20Care");
+        //    }
+        //    TempData["SectorA"] = JsonConvert.SerializeObject(sectorList.Gain.Take(10));
 
-            //TempData["Sector"] = JsonConvert.SerializeObject(sectorList.Take(10));
+        //    //TempData["Sector"] = JsonConvert.SerializeObject(sectorList.Take(10));
 
-            return View("Sector_Stock", sectorList);
-        }
+        //    return View("Sector_Stock", sectorList);
+        //}
 
         public IActionResult PopulateSector1()
         {
@@ -741,27 +748,95 @@ namespace API_Usage.Controllers
             return sectorList;
         }
 
-        public List<GainersList> getSectorStock(string sector)
+        //public List<GainersList> getSectorStock(string sector)
+        //{
+        //    string IEXTrading_API_PATH = BASE_URL + "stock/market/collection/sector?collectionName=" + sector;
+        //    string gList = "";
+        //    List<GainersList> sectorStock = null;
+
+        //    // connect to the IEXTrading API and retrieve information
+        //    //httpClient.BaseAddress = new Uri(IEXTrading_API_PATH);
+        //    HttpResponseMessage response = httpClient.GetAsync(IEXTrading_API_PATH).GetAwaiter().GetResult();
+
+        //    // read the Json objects in the API response
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        gList = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        //    }
+        //    if (!gList.Equals(""))
+        //    {
+        //        sectorStock = JsonConvert.DeserializeObject<List<GainersList>>(gList, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+
+        //    }
+        //    return sectorStock;
+        //}
+
+        public FinancialList getFinancials(string symbols)
         {
-            string IEXTrading_API_PATH = BASE_URL + "stock/market/collection/sector?collectionName=" + sector;
-            string gList = "";
-            List<GainersList> sectorStock = null;
+            string IEXTrading_API_PATH = BASE_URL + "stock/" + symbols + "/financials";
+            string fList = "";
+            FinancialList finance = null;
 
             // connect to the IEXTrading API and retrieve information
-            //httpClient.BaseAddress = new Uri(IEXTrading_API_PATH);
+
             HttpResponseMessage response = httpClient.GetAsync(IEXTrading_API_PATH).GetAwaiter().GetResult();
 
             // read the Json objects in the API response
             if (response.IsSuccessStatusCode)
             {
-                gList = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                fList = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             }
-            if (!gList.Equals(""))
+            if (!fList.Equals(""))
             {
-                sectorStock = JsonConvert.DeserializeObject<List<GainersList>>(gList, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-
+                finance = JsonConvert.DeserializeObject<FinancialList>(fList, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
-            return sectorStock;
+            response.Content.Dispose();
+            return finance;
+        }
+
+        public IActionResult financials(string symbol)
+        {
+            ViewBag.dbSucessComp = 0;
+            financialData vfinancial = new financialData();
+            vfinancial.company = dbContext.Companies.ToList();
+            try
+            {
+                if (symbol != null)
+                {
+                    vfinancial.finance = getFinancials(symbol);
+                }
+                else
+                {
+                    vfinancial.finance = getFinancials("aapl");
+                }
+
+
+                TempData["Financial"] = JsonConvert.SerializeObject(vfinancial);
+                return View("compFinance", vfinancial);
+            }
+            catch (Exception)
+            {
+                return View("compFinance", vfinancial);
+            }
+        }
+
+        public IActionResult PopulateFinancial()
+        {
+            financialData finance = JsonConvert.DeserializeObject<financialData>(TempData["Financial"].ToString());
+            TempData.Keep("Financial");
+            foreach (Company item in finance.company)
+            {
+
+                //Database will give PK constraint violation error when trying to insert record with existing PK.
+                //So add company only if it doesnt exist, check existence using symbol (PK)
+                if (dbContext.FinancialList.Where(c => c.symbol.Equals(item.symbol)).Count() == 0)
+                {
+                    dbContext.FinancialList.Add(finance.finance);
+                }
+            }
+            dbContext.SaveChanges();
+            ViewBag.dbSuccessComp = 1;
+            return View("compFinance", finance);
         }
     }
 }

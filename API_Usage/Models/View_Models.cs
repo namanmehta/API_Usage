@@ -41,4 +41,10 @@ namespace API_Usage.Models
         public List<GainersList> Gain { get; set; }
         public List<Sector> SectorL { get; set; }
     }
+
+    public class financialData
+    {
+        public FinancialList finance { get; set; }
+        public List<Company> company { get; set; }
+    }
 }

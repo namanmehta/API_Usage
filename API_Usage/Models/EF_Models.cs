@@ -122,8 +122,10 @@ namespace API_Usage.Models
 
     public class News
     {
-        public DateTime datetime { get; set; }
         [Key]
+        public int newsid { get; set; }
+        public DateTime datetime { get; set; }
+        
         public string headline { get; set; }
         public string source { get; set; }
         public string url { get; set; }
@@ -137,6 +139,7 @@ namespace API_Usage.Models
     public class Stats
     {
         [Key]
+        public int compid { get; set; }
         public string companyName { get; set; }
         public long marketcap { get; set; }
         public float beta { get; set; }
@@ -197,6 +200,7 @@ namespace API_Usage.Models
 
         public string symbol { get; set; }
         [Key]
+        public int cryptoid { get; set; }
         public string companyName { get; set; }
         public string primaryExchange { get; set; }
         public string sector { get; set; }
@@ -249,6 +253,7 @@ namespace API_Usage.Models
     {
         public string type { get; set; }
         [Key]
+        public int sectorsid { get; set; }
         public string name { get; set; }
         public float performance { get; set; }
         public long lastUpdated { get; set; }
@@ -261,6 +266,7 @@ namespace API_Usage.Models
     {
         public string symbol { get; set; }
         [Key]
+        public int gainid { get; set; }
         public string companyName { get; set; }
         public string primaryExchange { get; set; }
         public string sector { get; set; }
@@ -300,6 +306,42 @@ namespace API_Usage.Models
         public float week52High { get; set; }
         public string week52Low { get; set; }
         public float ytdChange { get; set; }
+    }
+
+    public class FinancialList
+    {
+
+        [Key]
+        public int ID { get; set; }
+        public string symbol { get; set; }
+        public List<Financial> financials { get; set; }
+    }
+
+    public class Financial
+    {
+
+        [Key]
+        public int ID { get; set; }
+        public string reportDate { get; set; }
+        public long grossProfit { get; set; }
+        public long costOfRevenue { get; set; }
+        public long operatingRevenue { get; set; }
+        public long totalRevenue { get; set; }
+        public long operatingIncome { get; set; }
+        public long netIncome { get; set; }
+        public long researchAndDevelopment { get; set; }
+        public long operatingExpense { get; set; }
+        public long currentAssets { get; set; }
+        public long totalAssets { get; set; }
+        public long totalLiabilities { get; set; }
+        public long currentCash { get; set; }
+        public long currentDebt { get; set; }
+        public long totalCash { get; set; }
+        public long totalDebt { get; set; }
+        public long shareholderEquity { get; set; }
+        public long cashChange { get; set; }
+        public long cashFlow { get; set; }
+        public string operatingGainsLosses { get; set; }
     }
 
 
